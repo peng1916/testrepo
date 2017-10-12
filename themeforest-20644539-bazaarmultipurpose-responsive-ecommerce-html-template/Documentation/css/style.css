@@ -1,0 +1,71 @@
+body {
+	font-size: 14px;
+	background: #ffffff;
+}
+/* Common Css start */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-transform: capitalize;
+	margin-bottom: 20px;
+}
+img {
+	width: 100%;
+	height: auto;
+	margin-bottom: 20px;
+}
+ul {
+	margin: 0;
+	padding: 0;
+}
+ul li {
+	list-style-type: none;
+}
+.my-sec {
+	padding-top: 80px;
+}
+.my-sec h2 {
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #dddddd;
+}
+.main-logo {
+	width: 180px;
+	height: auto;
+}
+.my-content {
+	padding: 30px;
+}
+.my-content ul li {
+	color: #E88501;
+	margin-bottom: 5px;
+	text-transform: capitalize;
+}
+.my-content ul li span {
+	color: #50af21; 
+	margin-left: 10px;
+}
+.my-content ul li span a {
+	color: #0fa53d;
+}
+
+/* Sidebar Nav start */
+.navbar-default {
+	background: transparent;
+	border-color: transparent;
+}
+.sidebar-nav {
+	padding-top: 30px;
+}
+
+/* Responsive */
+@media only screen and (max-width:767px) {
+	.navbar-default .navbar-toggle {
+		display: none;
+	}
+}
+
+

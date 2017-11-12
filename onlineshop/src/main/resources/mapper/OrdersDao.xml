@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soecode.lyf.dao.OrdersDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<select id="queryById" resultType="Orders" parameterType="long">
+		<!-- 具体的sql -->
+		SELECT
+		  	id,
+			orderTime,
+			payTime,
+			orderMoney,
+			orderSt,
+			address,
+			phone,
+			customerId 	
+		FROM
+			orders
+		WHERE
+			id = #{id}
+	</select>
+	
+	<select id="queryAll" resultType="Orders">
+		SELECT
+		  	id,
+			orderTime,
+			payTime,
+			orderMoney,
+			orderSt,
+			address,
+			phone,
+			customerId 	
+		FROM
+			orders
+		ORDER BY
+			id
+		LIMIT #{offset}, #{limit}
+	</select>
+    <!-- 
+	<update id="reduceNumber">
+		UPDATE orders
+		SET number = number - #{num}
+		WHERE
+			book_id = #{id}
+		AND number > 0
+	</update>
+	 -->
+</mapper>

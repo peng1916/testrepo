@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soecode.lyf.dao.UserDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<select id="queryById" resultType="User" parameterType="long">
+		<!-- 具体的sql -->
+		SELECT
+			id,
+			name,
+			password,
+			phone,
+			mail,
+			address,
+			role 
+		FROM
+			user
+		WHERE
+			id = #{id}
+	</select>
+	
+	<select id="queryAll" resultType="User">
+		SELECT
+			id,
+			name,
+			password,
+			phone,
+			mail,
+			address,
+			role 
+		FROM
+			user
+		ORDER BY
+			id
+		LIMIT #{offset}, #{limit}
+	</select>
+    <!-- 
+	<update id="reduceNumber">
+		UPDATE user
+		SET number = number - #{num}
+		WHERE
+			book_id = #{id}
+		AND number > 0
+	</update>
+	 -->
+</mapper>

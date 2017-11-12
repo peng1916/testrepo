@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.soecode.ssm</groupId>
-	<artifactId>ssm</artifactId>
+	<artifactId>SHOP</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ssm Maven Webapp</name>
@@ -67,6 +67,12 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
+		</dependency>
+		<dependency> 
+		   <groupId>javax.servlet.jsp</groupId> 
+		   <artifactId>jsp-api</artifactId> 
+		   <version>2.1</version> 
+		   <scope>provided</scope>
 		</dependency>
 
 		<!-- 4.Spring -->
@@ -140,7 +146,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>ssm</finalName>
+		<finalName>SHOP</finalName>
 		 <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

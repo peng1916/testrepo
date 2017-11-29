@@ -23,11 +23,14 @@ public class ProductController {
 	
 	@RequestMapping(value = "/{id}/detail", method = RequestMethod.GET)
 	private ModelAndView detail(@PathVariable("id") Long id, Model model) {
+		System.out.println("ProductController,id=" + id);
+
 		if (id == null) {
 			ModelAndView modelAndView = new ModelAndView("error");
 			logger.error("ProductController->detail(id == null");
 			return modelAndView;
 		}
+		System.out.println("ProductController2,id=" + id);
 		Product product = productService.getById(id);
 		if (product == null) {
 			ModelAndView modelAndView = new ModelAndView("error");

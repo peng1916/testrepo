@@ -11,7 +11,8 @@
    		  name,
 		  quantity,
 		  productId,
-		  orderId			
+		  orderId,
+		  status			
 		FROM
 			orderdetail
 		WHERE
@@ -24,13 +25,114 @@
    		  name,
 		  quantity,
 		  productId,
-		  orderId			
+		  orderId,
+		  status			
 		FROM
 			orderdetail
 		ORDER BY
 			id
 		LIMIT #{offset}, #{limit}
 	</select>
+	
+	<select id="querySum" resultType="OrderGroup">
+		SELECT
+		  productId,
+		  sum(quantity) AS sum
+		FROM
+			orderdetail
+		WHERE
+			status='0'
+		GROUP BY productId
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="queryAllByOrdersId" resultType="Orderdetail">
+		SELECT
+		  id,
+   		  name,
+		  quantity,
+		  productId,
+		  orderId,
+		  status			
+		FROM
+			orderdetail
+		WHERE
+			orderId = #{orderId}
+		ORDER BY
+			id
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	
+	<select id="queryUnbuyedAllByOrdersId" resultType="Orderdetail">
+		SELECT
+		  id,
+   		  name,
+		  quantity,
+		  productId,
+		  orderId,
+		  status			
+		FROM
+			orderdetail
+		WHERE
+			orderId = #{orderId}
+		AND
+			status='0'
+		ORDER BY
+			id
+		LIMIT #{offset}, #{limit}
+	</select>
+
+	<select id="queryUnbuyedAllByProductId" resultType="Orderdetail">
+		SELECT
+		  id,
+   		  name,
+		  quantity,
+		  productId,
+		  orderId,
+		  status			
+		FROM
+			orderdetail
+		WHERE
+			productId = #{productId}
+		AND
+			status='0'
+		ORDER BY
+			id
+		LIMIT #{offset}, #{limit}
+	</select>
+
+	
+	<select id="queryUnbuyedAll" resultType="Orderdetail">
+		SELECT
+		  id,
+   		  name,
+		  quantity,
+		  productId,
+		  orderId,
+		  status			
+		FROM
+			orderdetail
+		AND
+			status='0'
+		ORDER BY
+			id
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO orderdetail (name,quantity,productId,orderId, status)
+		VALUES (#{name},#{quantity},#{productId},#{orderId},#{status})
+	</insert>
+	
+	
+	<update id="update">
+		UPDATE orderdetail 
+		SET quantity = #{quantity}, status = #{status}
+		WHERE
+			id=#{id}
+	</update>
+	
     <!-- 
 	<update id="reduceNumber">
 		UPDATE orderdetail

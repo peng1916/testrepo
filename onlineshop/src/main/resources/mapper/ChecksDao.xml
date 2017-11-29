@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soecode.lyf.dao.ChecksDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<select id="queryById" resultType="Checks" parameterType="long">
+		<!-- 具体的sql -->
+		SELECT
+		  	id,
+			checkTime,
+			posNo,
+			result,
+			resultId
+		FROM
+			checks
+		WHERE
+			id = #{id}
+	</select>
+	
+	<select id="queryListByResultId" resultType="Checks" parameterType="long">
+		<!-- 具体的sql -->
+		SELECT
+		  	id,
+			checkTime,
+			posNo,
+			result,
+			resultId
+		FROM
+			checks
+		WHERE
+			resultId = #{resultId}
+	</select>
+	
+	<select id="queryList" resultType="Checks">
+		SELECT
+		  	id,
+			checkTime,
+			posNo,
+			result,
+			resultId 	
+		FROM
+			checks
+		ORDER BY
+			id
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="queryListSuccess" resultType="Checks">
+		SELECT
+		  	id,
+			checkTime,
+			posNo,
+			result,
+			resultId 	
+		FROM
+			checks
+		WHERE
+			result = '1'
+		ORDER BY
+			id
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="queryListFail" resultType="Checks">
+		SELECT
+		  	id,
+			checkTime,
+			posNo,
+			result,
+			resultId 	
+		FROM
+			checks
+		WHERE
+			result = '0'
+		ORDER BY
+			id
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO checks (checkTime,posNo,result,resultId)
+		VALUES (#{checkTime},#{posNo},#{result},#{resultId})
+	</insert>
+    <!-- 
+	<update id="reduceNumber">
+		UPDATE orders
+		SET number = number - #{num}
+		WHERE
+			book_id = #{id}
+		AND number > 0
+	</update>
+	 -->
+</mapper>

@@ -77,20 +77,9 @@ CREATE TABLE `orderdetail` (
   `quantity` int(11) DEFAULT NULL,
   `productId` bigint(20) DEFAULT NULL,
   `orderId` bigint(20) DEFAULT NULL,
+  `status` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-
-DROP TABLE IF EXISTS `shoppingcart`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `shoppingcart` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `status` tinyint(4) DEFAULT NULL COMMENT '1±íÊ¾ÒÑ¹ºÂò£¬0±íÊ¾Î´¹ºÂò',
-  `userId` bigint(20) DEFAULT NULL
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
@@ -98,11 +87,39 @@ DROP TABLE IF EXISTS `shoppingcartitem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `shoppingcartitem` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `cartId` bigint(20) NOT NULL,
-  `productId` bigint(20) DEFAULT NULL,
+  `userId` bigint(20) NOT NULL,
+  `productId` bigint(20) NOT NULL,
   `quantity` int(11) DEFAULT NULL,
   `status` tinyint(4) DEFAULT NULL COMMENT '1±íÊ¾ÒÑ¹ºÂò£¬0±íÊ¾Î´¹ºÂò',
+  PRIMARY KEY (`userId`, `productId`)
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+DROP TABLE IF EXISTS `checks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `checks` (
+  `id`         bigint(20) NOT NULL AUTO_INCREMENT,
+  `checkTime`  datetime DEFAULT NULL,
+  `posNo`      bigint(20) DEFAULT NULL,
+  `result`     smallint(6) DEFAULT NULL,
+  `resultId`   bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+DROP TABLE IF EXISTS `checkdetail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `checkdetail` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `productId` bigint(20) DEFAULT NULL,
+  `checkId` bigint(20) DEFAULT NULL,
+  `status` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
+

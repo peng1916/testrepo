@@ -6,6 +6,7 @@ public class Orderdetail {
 	private int quantity;
 	private long productId;
 	private long orderId;
+	private int status;
 	
 	public Orderdetail(){
 		
@@ -48,6 +49,14 @@ public class Orderdetail {
 	}
 	public void setOrderId(long orderId) {
 		this.orderId = orderId;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	@Override

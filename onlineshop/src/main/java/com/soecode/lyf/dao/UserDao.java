@@ -23,6 +23,14 @@ public interface UserDao {
 	 * @return
 	 */
 	List<User> queryAll(@Param("offset") int offset, @Param("limit") int limit);
+	
+	/**
+	 * 通过ID查询单本图书
+	 * 
+	 * @param id
+	 * @return
+	 */
+	User queryByPass(@Param("name")String name, @Param("password")String password, @Param("role")int role);
 
 	/**
 	 * 减少馆藏数量

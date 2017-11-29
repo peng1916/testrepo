@@ -3,34 +3,63 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.soecode.lyf.dao.ShopCartItemDao">
-	<!-- 目的：为dao接口方法提供sql语句配置 -->
-	<select id="queryById" resultType="ShopCartItem" parameterType="long">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->	
+	<select id="queryById" resultType="ShopCartItem">
 		<!-- 具体的sql -->
 		SELECT
-			id,
-			cartId,
+			userId,
 			productId,
 			quantity,
 			status 
 		FROM
 			shoppingcartitem
 		WHERE
-			id = #{id}
-	</select>
+			userId = #{user_id}
+		AND productId = #{product_id}
+	</select>	
 	
 	<select id="queryAll" resultType="ShopCartItem">
 		SELECT
-			id,
-			cartId,
+			userId,
 			productId,
 			quantity,
 			status 
 		FROM
 			shoppingcartitem
 		ORDER BY
-			id
+			userId
 		LIMIT #{offset}, #{limit}
 	</select>
+	
+	
+	<select id="queryAllByUserId" resultType="ShopCartItem">
+		SELECT
+			userId,
+			productId,
+			quantity,
+			status 
+		FROM
+			shoppingcartitem
+		WHERE 
+			userId = #{user_id}
+		ORDER BY
+			userId
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO shoppingcartitem (userId,productId,quantity,status)
+		VALUES (#{user_id},#{product_id},#{quantity},'0')
+	</insert>
+	
+	<update id="update">
+		UPDATE shoppingcartitem 
+		SET quantity = #{quantity}
+		WHERE
+			userId=#{user_id}
+		AND productId=#{product_id}
+	</update>
+	
     <!-- 
 	<update id="reduceNumber">
 		UPDATE shoppingcartitem

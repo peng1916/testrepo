@@ -1,6 +1,6 @@
 package com.soecode.lyf.entity;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Orders {
 	private long id;
@@ -18,6 +18,16 @@ public class Orders {
 	
 	public Orders(long id, Timestamp orderTime, Timestamp payTime, double orderMoney, int orderSt, String address, String phone, long customerId){
 		this.id = id;
+		this.orderTime = orderTime;
+		this.payTime = payTime;
+		this.orderMoney = orderMoney;
+		this.orderSt = orderSt;
+		this.address = address;
+		this.phone = phone;
+		this.customerId = customerId;
+	}
+	
+	public Orders(Timestamp orderTime, Timestamp payTime, double orderMoney, int orderSt, String address, String phone, long customerId){
 		this.orderTime = orderTime;
 		this.payTime = payTime;
 		this.orderMoney = orderMoney;

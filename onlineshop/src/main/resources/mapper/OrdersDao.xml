@@ -37,6 +37,63 @@
 			id
 		LIMIT #{offset}, #{limit}
 	</select>
+
+
+	<select id="queryFinishedAll" resultType="Orders">
+		SELECT
+		  	id,
+			orderTime,
+			payTime,
+			orderMoney,
+			orderSt,
+			address,
+			phone,
+			customerId 	
+		FROM
+			orders
+		WHERE
+			orderSt='1'
+		ORDER BY
+			id
+		LIMIT #{offset}, #{limit}
+	</select>
+
+
+	<select id="queryUnfinishedAll" resultType="Orders">
+		SELECT
+		  	id,
+			orderTime,
+			payTime,
+			orderMoney,
+			orderSt,
+			address,
+			phone,
+			customerId 	
+		FROM
+			orders
+		WHERE
+			orderSt='0'			
+		ORDER BY
+			id
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO orders (orderTime,payTime,orderMoney,orderSt, address,phone, customerId)
+		VALUES (#{orderTime},#{payTime},#{orderMoney},#{orderSt},#{address},#{phone},#{customId})
+	</insert>
+	
+	<insert id="insertOrder" parameterType="com.soecode.lyf.entity.Orders" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO orders (orderTime,payTime,orderMoney,orderSt, address,phone, customerId)
+		VALUES (#{orderTime},#{payTime},#{orderMoney},#{orderSt},#{address},#{phone},#{customerId})
+	</insert>
+	
+	<update id="update">
+		UPDATE orders 
+		SET orderSt = #{orderSt} 
+		WHERE
+			id=#{id}
+	</update>
     <!-- 
 	<update id="reduceNumber">
 		UPDATE orders

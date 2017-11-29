@@ -1,8 +1,7 @@
 package com.soecode.lyf.entity;
 
 public class ShopCartItem {
-	private long id;
-	private long cartId;
+	private long userId;
 	private long productId;
 	private int quantity;
 	private int status;
@@ -11,25 +10,18 @@ public class ShopCartItem {
 		
 	}
 	
-	public ShopCartItem( long id, long cartId, long productId, int quantity, int status ){
-		this.id = id;
-		this.cartId = cartId;
+	public ShopCartItem( long userId, long productId, int quantity, int status ){
+		this.userId = userId;
 		this.productId = productId;
 		this.quantity = quantity;
 		this.status = status;
 	}
 	
-	public long getId() {
-		return id;
+	public long getUserId() {
+		return userId;
 	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public long getCartId() {
-		return cartId;
-	}
-	public void setCartId(long cartId) {
-		this.cartId = cartId;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 	public long getProductId() {
 		return productId;
@@ -51,7 +43,7 @@ public class ShopCartItem {
 	}
 	@Override
 	public String toString() {
-		return "Customer:id=[" + this.id + "], cartId=[" + this.cartId + "]";
+		return "Customer:userId=[" + this.userId + "], productId=[" + this.productId + "]";
 	}
 
 }

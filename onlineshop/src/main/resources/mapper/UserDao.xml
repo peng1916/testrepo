@@ -35,6 +35,25 @@
 			id
 		LIMIT #{offset}, #{limit}
 	</select>
+	
+	<select id="queryByPass" resultType="User">
+		SELECT
+			id,
+			name,
+			password,
+			phone,
+			mail,
+			address,
+			role 
+		FROM
+			user
+		WHERE
+			name = #{name}
+			AND
+			password = #{password}
+			AND
+			role = #{role}
+	</select>
     <!-- 
 	<update id="reduceNumber">
 		UPDATE user

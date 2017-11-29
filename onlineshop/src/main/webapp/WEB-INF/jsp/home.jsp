@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>海淘代购商城</title>
 
 	<link href="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
@@ -16,7 +16,52 @@
 	<link href="${pageContext.request.contextPath}/css/skin.css" rel="stylesheet" type="text/css" />
 	<script src="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.cookie.js"></script>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		  if( $.cookie('user_name') != null )
+		  {
+			  $("#user_name").html($.cookie('user_name'));
+			  $("#user_register").html('退出帐号');
+			  
+				var user_id = $.cookie('user_id');
+				if( user_id == null )
+				{
+					alert("请登录！");
+					return;
+				}
 
+				var xmlhttp;
+				if (window.XMLHttpRequest)
+				{// code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				}
+				else
+				{// code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				
+				xmlhttp.onreadystatechange=function()
+				{
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				  {
+					  $("#J_MiniCartNum").html(xmlhttp.responseText);
+					  $("#J_MiniCartNum2").html(xmlhttp.responseText);
+				  }
+				}
+				xmlhttp.open("GET","${pageContext.request.contextPath}/shopcart/" + user_id + "/count",true);
+				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				xmlhttp.send();
+		  }
+		  else
+		  {
+			  $("#user_name").html('亲，请登录');
+			  $("#user_register").html('免费注册');
+		  }
+	});
+
+	</script>
 </head>
 <body>
 	<div class="hmtop">
@@ -25,8 +70,8 @@
 			<ul class="message-l">
 				<div class="topMessage">
 					<div class="menu-hd">
-						<a href="#" target="_top" class="h">亲，请登录</a>
-						<a href="#" target="_top">免费注册</a>
+						<a href="${pageContext.request.contextPath}/user/welcome" id="user_name" target="_top" class="h">亲，请登录</a>
+						<a href="${pageContext.request.contextPath}/user/welcome" id="user_register" target="_top">免费注册</a>
 					</div>
 				</div>
 			</ul>
@@ -35,10 +80,10 @@
 					<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
 				</div>
 				<div class="topMessage my-shangcheng">
-					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+					<div class="menu-hd MyShangcheng"><a href="${pageContext.request.contextPath}/user/welcome" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 				</div>
 				<div class="topMessage mini-cart">
-					<div class="menu-hd"><a id="mc-menu-hd" href="/shopcart/25/detail" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+					<div class="menu-hd"><a id="mc-menu-hd" href="${pageContext.request.contextPath}/shopcart/${cookie.user_id.value}/detail" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
 				</div>
 				<div class="topMessage favorite">
 					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
@@ -83,7 +128,7 @@
 				   <div class="long-title"><span class="all-goods">全部分类</span></div>
 				   <div class="nav-cont">
 						<ul>
-							<li class="index"><a href="#">${book.bookId}</a></li>
+							<li class="index"><a href="#">首页</a></li>
                                <li class="qc"><a href="#">闪购</a></li>
                                <li class="qc"><a href="#">限时抢</a></li>
                                <li class="qc"><a href="#">团购</a></li>
@@ -843,18 +888,18 @@
 				
 				<div class="am-container ">
 					<div class="shopTitle ">
-						<h4>甜品</h4>
-						<h3>每一道甜品都有一个故事</h3>
+						<h4>黑五</h4>
+						<h3>黑色星期五热点大推荐</h3>
 						<div class="today-brands ">
-							<a href="# ">桂花糕</a>
-							<a href="# ">奶皮酥</a>
-							<a href="# ">栗子糕 </a>
-							<a href="# ">马卡龙</a>
-							<a href="# ">铜锣烧</a>
-							<a href="# ">豌豆黄</a>
+							<a href="# ">箱包</a>
+							<a href="# ">化妆品</a>
+							<a href="# ">母婴用品 </a>
+							<a href="# ">药品</a>
+							<a href="# ">电子产品</a>
+							<a href="# ">服装</a>
 						</div>
 						<span class="more ">
-                   <a href="# ">更多美味<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
+                   <a href="# ">更多商品<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
                        </span>
 					</div>
 				</div>
@@ -862,12 +907,12 @@
 				<div class="am-g am-g-fixed floodFour">
 					<div class="am-u-sm-5 am-u-md-4 text-one list ">
 						<div class="word">
-							<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-							<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-							<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>	
-							<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-							<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>
-							<a class="outer" href="#"><span class="inner"><b class="text">核桃</b></span></a>									
+							<a class="outer" href="#"><span class="inner"><b class="text">女装</b></span></a>
+							<a class="outer" href="#"><span class="inner"><b class="text">男装</b></span></a>
+							<a class="outer" href="#"><span class="inner"><b class="text">女鞋</b></span></a>	
+							<a class="outer" href="#"><span class="inner"><b class="text">奶粉</b></span></a>
+							<a class="outer" href="#"><span class="inner"><b class="text">皮包</b></span></a>
+							<a class="outer" href="#"><span class="inner"><b class="text">手表</b></span></a>									
 						</div>
 						<a href="# ">
 							<div class="outer-con ">
@@ -875,7 +920,7 @@
 								开抢啦！
 								</div>
 								<div class="sub-title ">
-									零食大礼包
+									超级大礼包
 								</div>									
 							</div>
                                  <img src="${pageContext.request.contextPath}/images/act1.png " />								
@@ -886,80 +931,80 @@
 						<div class="am-u-sm-7 am-u-md-4 text-two sug">
 							<div class="outer-con ">
 								<div class="title ">
-									雪之恋和风大福
+									迪奥经典口红
 								</div>									
 								<div class="sub-title ">
-									¥13.8
+									¥209
 								</div>
 								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
 							</div>
-							<a href="/product/40/detail"><img src="${pageContext.request.contextPath}/images/2.jpg" /></a>
+							<a href="${pageContext.request.contextPath}/product/40/detail"><img src="${pageContext.request.contextPath}/images/product/dior_di1.jpg" /></a>
 						</div>
 
 						<div class="am-u-sm-7 am-u-md-4 text-two">
 							<div class="outer-con ">
 								<div class="title ">
-									雪之恋和风大福
+									LV糖果钱包
 								</div>
 								<div class="sub-title ">
-									¥13.8
+									¥3150
 								</div>
 								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
 							</div>
-							<a href="product/40/detail "><img src="${pageContext.request.contextPath}/images/1.jpg" /></a>
+							<a href="${pageContext.request.contextPath}/product/42/detail"><img src="${pageContext.request.contextPath}/images/product/lv_di1.jpg" /></a>
 						</div>
 
 
 					<div class="am-u-sm-3 am-u-md-2 text-three big">
 						<div class="outer-con ">
 							<div class="title ">
-								小优布丁
+								chanel香水
 							</div>
 							<div class="sub-title ">
-								¥4.8
+								¥649
 							</div>
 							<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
 						</div>
-						<a href="# "><img src="${pageContext.request.contextPath}/images/5.jpg" /></a>
+						<a href="${pageContext.request.contextPath}/product/41/detail"><img src="${pageContext.request.contextPath}/images/product/chanel_di2.jpg" /></a>
 					</div>
 
 					<div class="am-u-sm-3 am-u-md-2 text-three sug">
 						<div class="outer-con ">
 							<div class="title ">
-								小优布丁
+								A2 Platinum奶粉
 							</div>
 							<div class="sub-title ">
-								¥4.8
+								¥209
 							</div>
 							<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
 						</div>
-						<a href="# "><img src="${pageContext.request.contextPath}/images/3.jpg" /></a>
+						<a href="${pageContext.request.contextPath}/product/43/detail"><img src="${pageContext.request.contextPath}/images/product/milk_di1.jpg" /></a>
 					</div>
 
 					<div class="am-u-sm-3 am-u-md-2 text-three ">
 						<div class="outer-con ">
 							<div class="title ">
-								小优布丁
+								SK-II神仙水
 							</div>
 							<div class="sub-title ">
-								¥4.8
+								¥1099
 							</div>
 							<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
 						</div>
-						<a href="# "><img src="${pageContext.request.contextPath}/images/4.jpg" /></a>
+						<a href="# "><img src="${pageContext.request.contextPath}/images/product/skii_di1.jpg" /></a>
 					</div>
 
 					<div class="am-u-sm-3 am-u-md-2 text-three last big ">
 						<div class="outer-con ">
 							<div class="title ">
-								小优布丁
+								日本久光膏药
 							</div>
 							<div class="sub-title ">
-								¥4.8
+								¥34
 							</div>
 							<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
 						</div>
-						<a href="# "><img src="${pageContext.request.contextPath}/images/5.jpg" /></a>
+						<a href="# "><img src="${pageContext.request.contextPath}/images/product/pill_di1.jpg" /></a>
 					</div>
 
 				</div>
@@ -2167,7 +2212,7 @@
 	<div class="navCir">
 		<li class="active"><a href="home.html"><i class="am-icon-home "></i>首页</a></li>
 		<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
-		<li><a href="/shopcart/25/detail"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
+		<li><a href="${pageContext.request.contextPath}/shopcart/${cookie.user_id.value}/detail"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
 		<li><a href="../person/index.html"><i class="am-icon-user"></i>我的</a></li>					
 	</div>
 
@@ -2197,13 +2242,13 @@
 
 				</div>
 				<div id="shopCart " class="item ">
-					<a href="/shopcart/25/detail">
+					<a href="${pageContext.request.contextPath}/shopcart/${cookie.user_id.value}/detail">
 						<span class="message "></span>
 					</a>
 					<p>
 						购物车
 					</p>
-					<p class="cart_num ">0</p>
+					<p class="cart_num " id="J_MiniCartNum2">0</p>
 				</div>
 				<div id="asset " class="item ">
 					<a href="# ">

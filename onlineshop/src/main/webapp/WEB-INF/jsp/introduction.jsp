@@ -8,6 +8,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<title>商品详情</title>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/list.js"></script>
+		
+		
+		<link type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" />
 
 		<link href="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
 		<link href="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
@@ -15,14 +20,58 @@
 		<link type="text/css" href="${pageContext.request.contextPath}/css/optstyle.css" rel="stylesheet" />
 		<link type="text/css" href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" />
 
-		<script type="text/javascript" src="${pageContext.request.contextPath}/basic/js/jquery-1.7.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/basic/js/quick_links.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
-		<script type="text/javascript" src="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.imagezoom.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.flexslider.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/list.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.cookie.js"></script>
 
+	<script type="text/javascript">
+	$(document).ready(function(){
+		  if( $.cookie('user_name') != null )
+		  {
+			  $("#user_name").html($.cookie('user_name'));
+			  $("#user_register").html('退出帐号');
+			  
+				var user_id = $.cookie('user_id');
+				if( user_id == null )
+				{
+					alert("请登录！");
+					return;
+				}
+
+				var xmlhttp;
+				if (window.XMLHttpRequest)
+				{// code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				}
+				else
+				{// code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				
+				xmlhttp.onreadystatechange=function()
+				{
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				  {
+					  $("#J_MiniCartNum").html(xmlhttp.responseText);
+					  $("#J_MiniCartNum2").html(xmlhttp.responseText);
+				  }
+				}
+				xmlhttp.open("GET","${pageContext.request.contextPath}/shopcart/" + user_id + "/count",true);
+				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				xmlhttp.send();
+		  }
+		  else
+		  {
+			  $("#user_name").html('亲，请登录');
+			  $("#user_register").html('免费注册');
+		  }
+	});
+
+	</script>
 	</head>
 <body>
 
@@ -31,8 +80,8 @@
 		<ul class="message-l">
 			<div class="topMessage">
 				<div class="menu-hd">
-					<a href="#" target="_top" class="h">亲，请登录</a>
-					<a href="#" target="_top">免费注册</a>
+					<a id="user_name" href="${pageContext.request.contextPath}/user/welcome" target="_top" class="h">亲，请登录</a>
+					<a id="user_register" href="${pageContext.request.contextPath}/user/welcome" target="_top">免费注册</a>
 				</div>
 			</div>
 		</ul>
@@ -44,7 +93,7 @@
 				<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 			</div>
 			<div class="topMessage mini-cart">
-				<div class="menu-hd"><a id="mc-menu-hd" href="/shopcart/25/detail" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+				<div class="menu-hd"><a id="mc-menu-hd" href="${pageContext.request.contextPath}/shopcart/25/detail" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
 			</div>
 			<div class="topMessage favorite">
 				<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
@@ -253,19 +302,48 @@
 												<div class="theme-options">
 													<div class="cart-title">包装</div>
 													<ul>
-														<li class="sku-line selected">手袋单人份<i></i></li>
-														<li class="sku-line">礼盒双人份<i></i></li>
-														<li class="sku-line">全家福礼包<i></i></li>
+														<li id="guard" class="sku-line selected" title="银联前哨认证："  
+																data-container="body" data-toggle="popover" 
+																data-trigger="hover" data-placement="right" 
+																data-content="银联前哨认证是中国银联总公司提供的海外代购正品认证体系，将通过银联卡支付体系确保代购者在海外正规专柜或商场发生过对应的购买行为，保护消费者权利不受假货侵害。勾选此项您将购买到通过银联前哨认证的商品，更可靠更安心。">银联前哨认证<i></i></li>
+															
+<!-- 														<li class="sku-line">礼盒双人份<i></i></li> -->
+<!-- 														<li class="sku-line">全家福礼包<i></i></li> -->
 													</ul>
-												</div>
+<script>
+$(function () { 
+	$("[data-toggle='popover']").popover();
+	$("#guard").click(function(){
+		if($(this).hasClass('selected'))
+			$(this).removeClass('selected');
+		else
+			$(this).addClass('selected');
+	});
+});
+</script>								</div>
 												<div class="theme-options">
 													<div class="cart-title number">数量</div>
 													<dd>
-														<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
+														<input id="min" class="am-btn am-btn-default" onclick="minusNum()" name="" type="button" value="-" />
 														<input id="text_box" name="" type="text" value="1" style="width:30px;" />
-														<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
+														<input id="add" class="am-btn am-btn-default" name="" onclick="addNum()" type="button" value="+" />
 														<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
 													</dd>
+													
+													<script>
+													function minusNum()
+													{
+														var curr = document.getElementById("text_box").value;
+														if( parseInt(curr) > 1 )
+															document.getElementById("text_box").value = parseInt(curr) - 1;
+													}
+													
+													function addNum()
+													{
+														var curr = document.getElementById("text_box").value;
+														document.getElementById("text_box").value = parseInt(curr) + 1;
+													}
+													</script>
 
 												</div>
 												<div class="clear"></div>
@@ -327,10 +405,54 @@
 						</li>
 						<li>
 							<div class="clearfix tb-btn tb-btn-basket theme-login">
-								<a id="LikBasket" title="加入购物车" href="#"><i></i>加入购物车</a>
+								<a id="LikBasket" title="加入购物车" href="#" onclick="addShopCart()"><i></i>加入购物车</a>
 							</div>
 						</li>
 					</div>
+					<script type="text/javascript">
+					function addShopCart()
+					{
+						var user_id;
+						var product_id = ${product.id};
+						var quantity = document.getElementById("text_box").value;
+					
+						user_id = $.cookie('user_id');
+						if( user_id == null )
+						{
+							alert("请登录！");
+							return;
+						}
+												
+						if( product_id == null || quantity == null )
+						{
+							alert("输入信息有误，请重新输入！");	
+						}
+
+						var xmlhttp;
+						if (window.XMLHttpRequest)
+						{// code for IE7+, Firefox, Chrome, Opera, Safari
+						  xmlhttp=new XMLHttpRequest();
+						}
+						else
+						{// code for IE6, IE5
+						  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						
+						xmlhttp.onreadystatechange=function()
+						{
+						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						  {
+							  //alert(xmlhttp.responseText);
+							  $("#J_MiniCartNum").html(xmlhttp.responseText);
+							  $("#J_MiniCartNum2").html(xmlhttp.responseText);
+
+						  }
+						}
+						xmlhttp.open("POST","${pageContext.request.contextPath}/shopcart/" + user_id + "/add",true);
+						xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+						xmlhttp.send("product_id=" + product_id + "&quantity=" + quantity);
+					}
+					</script>
 
 				</div>
 
@@ -1188,13 +1310,13 @@
 
 					</div>
 					<div id="shopCart" class="item">
-						<a href="/shopcart/25/detail">
+						<a href="${pageContext.request.contextPath}/shopcart/25/detail">
 							<span class="message"></span>
 						</a>
 						<p>
 							购物车
 						</p>
-						<p class="cart_num">0</p>
+						<p class="cart_num" id="J_MiniCartNum2">0</p>
 					</div>
 					<div id="asset" class="item">
 						<a href="#">

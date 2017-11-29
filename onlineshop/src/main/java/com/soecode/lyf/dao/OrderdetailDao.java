@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.soecode.lyf.entity.OrderGroup;
 import com.soecode.lyf.entity.Orderdetail;
 
 public interface OrderdetailDao {
@@ -23,7 +24,20 @@ public interface OrderdetailDao {
 	 * @return
 	 */
 	List<Orderdetail> queryAll(@Param("offset") int offset, @Param("limit") int limit);
+	
+	List<OrderGroup> querySum(@Param("offset") int offset, @Param("limit") int limit);
+	
+	List<Orderdetail> queryAllByOrdersId(@Param("orderId") long orderId, @Param("offset") int offset, @Param("limit") int limit);
+	
+	List<Orderdetail> queryUnbuyedAllByOrdersId(@Param("orderId") long orderId, @Param("offset") int offset, @Param("limit") int limit);
 
+	List<Orderdetail> queryUnbuyedAll(@Param("offset") int offset, @Param("limit") int limit);
+	
+	List<Orderdetail> queryUnbuyedAllByProductId(@Param("productId") long productId, @Param("offset") int offset, @Param("limit") int limit);
+
+	int insert(@Param("name") String name, @Param("quantity") int quantity, @Param("productId") long productId, @Param("orderId") long orderId, @Param("status") int status);
+	
+	int update(@Param("id") long id, @Param("quantity") int quantity, @Param("status") int status);
 	/**
 	 * 减少馆藏数量
 	 * 

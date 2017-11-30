@@ -2379,7 +2379,7 @@
 	<script>
 		window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
 	</script>
-	<script type="text/javascript " src="../basic/js/quick_links.js "></script>
+	<script type="text/javascript " src="${pageContext.request.contextPath}/basic/js/quick_links.js "></script>
 </body>
 
 </html>

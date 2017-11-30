@@ -300,12 +300,14 @@
 													</ul>
 												</div>
 												<div class="theme-options">
-													<div class="cart-title">包装</div>
+													<div class="cart-title">认证</div>
 													<ul>
+													<li id="guard1" class="sku-line" >不认证<i></i></li>
+															
 														<li id="guard" class="sku-line selected" title="银联前哨认证："  
 																data-container="body" data-toggle="popover" 
 																data-trigger="hover" data-placement="right" 
-																data-content="银联前哨认证是中国银联总公司提供的海外代购正品认证体系，将通过银联卡支付体系确保代购者在海外正规专柜或商场发生过对应的购买行为，保护消费者权利不受假货侵害。勾选此项您将购买到通过银联前哨认证的商品，更可靠更安心。">银联前哨认证<i></i></li>
+																data-content="银联前哨认证是中国银联总公司提供的海外代购正品认证体系，将通过银联卡支付体系确保代购者在海外正规专柜或商场发生过对应的购买行为，保护消费者权利不受假货侵害。勾选此项您将购买到通过银联前哨认证的商品，更可靠更安心。">银联正品认证<i></i></li>
 															
 <!-- 														<li class="sku-line">礼盒双人份<i></i></li> -->
 <!-- 														<li class="sku-line">全家福礼包<i></i></li> -->
@@ -315,12 +317,34 @@ $(function () {
 	$("[data-toggle='popover']").popover();
 	$("#guard").click(function(){
 		if($(this).hasClass('selected'))
+		{
 			$(this).removeClass('selected');
+			$("#guard1").addClass('selected');
+		}
 		else
+		{
 			$(this).addClass('selected');
+			$("#guard1").removeClass('selected');
+		}
+	});
+	$("#guard1").click(function(){
+		if($(this).hasClass('selected'))
+		{
+			$(this).removeClass('selected');
+			$("#guard").addClass('selected');
+		}
+		else
+		{
+			$(this).addClass('selected');
+			$("#guard").removeClass('selected');
+		}
 	});
 });
 </script>								</div>
+												<div class="theme-options">
+												&nbsp;&nbsp;银联正品认证通过银联交易记录确认代购者实际购买情况，购买正品更安心。<br />
+												&nbsp;&nbsp;<a style="font-weight:bold;"><font color="#FF0000">认证免费，限时免邮费！</font> 了解详情</a>
+												</div>
 												<div class="theme-options">
 													<div class="cart-title number">数量</div>
 													<dd>
@@ -375,7 +399,7 @@ $(function () {
 							<div class="hot">
 								<dt class="tb-metatit">店铺优惠</dt>
 								<div class="gold-list">
-									<p>购物满2件打8折，满3件7折<span>点击领券<i class="am-icon-sort-down"></i></span></p>
+									<p>选择银联正品认证可享受95折优惠<span>点击领券<i class="am-icon-sort-down"></i></span></p>
 								</div>
 							</div>
 							<div class="clear"></div>
